@@ -1,0 +1,82 @@
+<ResourceDictionary 
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:EmployeeManager">
+
+    <Style x:Key="tb" TargetType="TextBlock">
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Margin" Value="3"/>
+    </Style>
+
+    <Style TargetType="local:EmployeeDataForm">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="local:EmployeeDataForm">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="3" Width="{TemplateBinding Width}">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="150"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Grid.Column="0" Grid.Row="0" 
+					Text="First Name:" Style="{StaticResource tb}" />
+<TextBox Grid.Column="1" Grid.Row="0" 							x:Name="txtFirstName"
+    Text="{Binding Path=TheEmployee.FirstName, Mode=TwoWay, ValidatesOnDataErrors=True}" IsReadOnly="{Binding IsLocked}"/>
+
+                            <TextBlock Grid.Column="0" Grid.Row="1" 
+					Text="Last Name:" Style="{StaticResource tb}"/>
+                            <TextBox Grid.Column="1" Grid.Row="1" 							x:Name="txtLastName"
+                                 Text="{Binding Path=TheEmployee.LastName, Mode=TwoWay, ValidatesOnDataErrors=True}" IsReadOnly="{Binding IsLocked}"/>
+
+                            <TextBlock Grid.Column="0" Grid.Row="2" 							Text="Birthday:" Style="{StaticResource tb}"/>
+                            <TextBox Grid.Column="1" Grid.Row="2" 							x:Name="txtBirthday"
+                                 Text="{Binding Path=TheEmployee.Birthday, Mode=TwoWay, StringFormat='dddd, dd-MMMM-yyyy'}" IsReadOnly="{Binding IsLocked}" />
+
+                            <TextBlock Grid.Column="0" Grid.Row="3" Text="Group:" 					Style="{StaticResource tb}"/>
+                            <TextBox Grid.Column="1" Grid.Row="3" 							x:Name="txtGroup"
+                                Text="{Binding Path=TheEmployee.Group, Mode=TwoWay,  TargetNullValue=General}" IsReadOnly="{Binding IsLocked}"/>
+
+                            <TextBlock Grid.Column="0" Grid.Row="4" 
+					Text="Phone No.:" Style="{StaticResource tb}"/>
+                            <TextBox Grid.Column="1" Grid.Row="4" 							x:Name="txtPhoneNumber"
+                                 Text="{Binding Path=TheEmployee.PhoneNumber, Mode=TwoWay}" IsReadOnly="{Binding IsLocked}"/>
+
+                            <TextBlock Grid.Column="0" Grid.Row="5" 							Text="Address:" Style="{StaticResource tb}"/>
+                            <TextBox Grid.Column="1" Grid.Row="5"  							x:Name="txtAddress"
+                                 Text="{Binding Path=TheEmployee.Address, Mode=TwoWay}"                                     
+                                 AcceptsReturn="True" TextWrapping="Wrap" IsReadOnly="{Binding IsLocked}"/>
+
+                            <TextBlock Grid.Column="0" Grid.Row="6" 							Text="Income:" Style="{StaticResource tb}"/>
+                            <TextBox Grid.Column="1" Grid.Row="6" 							x:Name="txtIncome"
+                                 Text="{Binding Path=TheEmployee.Income, Mode=TwoWay, StringFormat=C, ValidatesOnDataErrors=True}" IsReadOnly="{Binding IsLocked}"/>
+
+                            <TextBlock Grid.Column="0" Grid.Row="7" Text="Tax:" 					Style="{StaticResource tb}"/>
+                            <TextBox Grid.Column="1" Grid.Row="7" 							x:Name="txtTaxPercent"
+                                 Text="{Binding Path=TheEmployee.TaxPercent, Mode=TwoWay, StringFormat=P, ValidatesOnDataErrors=True}" IsReadOnly="{Binding IsLocked}"/>
+
+                            <TextBlock Grid.Column="0" Grid.Row="8" 							Text="National ID:" 
+						Style="{StaticResource tb}"/>
+                            <TextBox Grid.Column="1" Grid.Row="8" 							x:Name="txtNationalID"
+                                 Text="{Binding Path=TheEmployee.NationalID, Mode=TwoWay, TargetNullValue=0000000000, ValidatesOnDataErrors=True}" IsReadOnly="{Binding IsLocked}"/>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

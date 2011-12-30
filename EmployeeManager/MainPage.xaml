@@ -1,0 +1,65 @@
+﻿<UserControl xmlns:DataControls="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Data"  
+    x:Class="EmployeeManager.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    xmlns:my="clr-namespace:EmployeeManager"
+    d:DesignHeight="300" d:DesignWidth="860">
+
+    <UserControl.Resources>
+        <my:EmployeesManager x:Key="employeeManagerViewSource"/>
+        <CollectionViewSource x:Key="employeeManagerEmployeesViewSource" 
+                              Source="{Binding Path=Employees, Source={StaticResource employeeManagerViewSource}}" />
+
+    </UserControl.Resources>
+
+    <Grid x:Name="LayoutRoot" Background="White"
+          DataContext="{StaticResource employeeManagerEmployeesViewSource}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="400"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <my:EmployeeDataForm x:Name="edf" Margin="3" Width="450" 
+    HorizontalAlignment="Left"
+    Grid.Column="1" IsLocked="True" 
+    TheEmployee="{Binding Path=SelectedItem, ElementName=dg}"
+    BorderBrush="Black" BorderThickness="2"/>
+
+
+        <DataControls:DataGrid x:Name="dg" ItemsSource="{Binding}"
+                               Margin="3" IsReadOnly="True"
+                               AutoGenerateColumns="False" 
+                               HeadersVisibility="Column"
+                               Grid.Row="0" Grid.Column="0"
+                               SelectionChanged="dg_SelectionChanged"
+                               >
+            <DataControls:DataGrid.Columns>
+                <DataControls:DataGridTextColumn Binding="{Binding FirstName}" 
+                                                 Header="First Name" Width="0.4*"
+                                                 />
+                <DataControls:DataGridTextColumn Binding="{Binding LastName}" 
+                                                 Header="Last Name" Width="0.4*"
+                                                 />
+                <DataControls:DataGridTextColumn 
+                    	Binding="{Binding ManagedEmployees, FallbackValue=N/A}" 
+                    	Header="Managed Emp." Width="0.2*" />
+            </DataControls:DataGrid.Columns>
+        </DataControls:DataGrid>
+
+
+        <StackPanel Orientation="Horizontal" Margin="3" Grid.Row="1">
+            <Button Content="New" x:Name="btnNew" Click="btnNew_Click"/>
+            <Button Content="Update" x:Name="btnUpdate" Click="btnUpdate_Click"/>
+            <Button Content="Delete" x:Name="btnDelete" Click="btnDelete_Click"/>
+            <Button Content="Group" x:Name="btnGroup" Click="btnGroup_Click"/>
+            <Button Content="UnGroup" x:Name="btnUnGroup" Click="btnUnGroup_Click"/>
+        </StackPanel>
+    </Grid>
+</UserControl>
